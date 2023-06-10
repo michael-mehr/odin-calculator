@@ -4,7 +4,11 @@ const calcButtonsArray = [...calcButtons];
 
 calcButtonsArray.forEach(e => e.addEventListener('click', handleClick));
 
-let firstNum, secondNum, operator;
+let displayText = display.textContent;
+
+let firstNum;
+let secondNum;
+let operator;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -42,11 +46,28 @@ function updateDisplay(str) {
 }
 
 function clear() {
+    firstNum = null;
+    secondNum = null;
+    operator = null;
     updateDisplay('0');
 }
 
 function handleClick(e) {
-    if (e.target.textContent === "clear") {
+    const target = e.target;
+    if (target.textContent === "clear") {
         clear();
+    } else if (target.classList.has('num')) {
+        handleNumber(Number(target.textContent));
+    } else if (target.classList.has('operator')) {
+        handleOperator(target.textContent);
     }
+
+}
+
+function handleNumber(num) {
+    console.log(num);
+}
+
+function handleOperator(operator) {
+    console.log(operator);
 }
