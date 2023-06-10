@@ -1,3 +1,7 @@
+const display = document.getElementById('display');
+const calcButtons = document.querySelectorAll('button');
+const calcButtonsArray = [...calcButtons];
+
 let firstNum, secondNum, operator;
 
 function add(num1, num2) {
@@ -29,4 +33,8 @@ function operate(operator, num1, num2) {
         default:
             return null;
     }
+}
+
+function updateDisplay(str) {
+    display.textContent = str;
 }
