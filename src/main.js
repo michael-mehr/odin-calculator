@@ -2,6 +2,8 @@ const display = document.getElementById('display');
 const calcButtons = document.querySelectorAll('button');
 const calcButtonsArray = [...calcButtons];
 
+calcButtonsArray.forEach(e => e.addEventListener('click', handleClick));
+
 let firstNum, secondNum, operator;
 
 function add(num1, num2) {
@@ -41,4 +43,10 @@ function updateDisplay(str) {
 
 function clear() {
     updateDisplay('0');
+}
+
+function handleClick(e) {
+    if (e.target.textContent === "clear") {
+        clear();
+    }
 }
