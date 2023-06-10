@@ -38,3 +38,7 @@ function operate(operator, num1, num2) {
 function updateDisplay(str) {
     display.textContent = str;
 }
+
+function clear() {
+    updateDisplay('0');
+}
