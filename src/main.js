@@ -42,7 +42,8 @@ function operate(operator, num1, num2) {
 }
 
 function updateDisplay(str) {
-    display.textContent = str;
+    displayText = str;
+    display.textContent = displayText;
 }
 
 function clear() {
@@ -56,16 +57,20 @@ function handleClick(e) {
     const target = e.target;
     if (target.textContent === "clear") {
         clear();
-    } else if (target.classList.has('num')) {
+    } else if (target.classList.contains('num')) {
         handleNumber(Number(target.textContent));
-    } else if (target.classList.has('operator')) {
+    } else if (target.classList.contains('operator')) {
         handleOperator(target.textContent);
     }
 
 }
 
 function handleNumber(num) {
-    console.log(num);
+    if (displayText === '0') {
+        updateDisplay(String(num));
+    } else {
+        updateDisplay(displayText + String(num));
+    }
 }
 
 function handleOperator(operator) {
