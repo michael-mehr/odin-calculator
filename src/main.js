@@ -6,9 +6,10 @@ calcButtonsArray.forEach(e => e.addEventListener('click', handleClick));
 
 let displayText = display.textContent;
 
-let firstNum;
-let secondNum;
-let operator;
+let heldNum = null;
+let heldOperator = null;
+
+let displayFlag = false;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -28,13 +29,13 @@ function divide(num1, num2) {
 
 function operate(operator, num1, num2) {
     switch (operator) {
-        case 'add':
+        case '+':
             return add(num1, num2);
-        case 'subtract':
+        case '-':
             return subtract(num1, num2);
-        case 'multiply':
+        case '*':
             return multiply(num1, num2);
-        case 'divide':
+        case '/':
             return divide(num1, num2);
         default:
             return null;
@@ -47,9 +48,8 @@ function updateDisplay(str) {
 }
 
 function clear() {
-    firstNum = null;
-    secondNum = null;
-    operator = null;
+    heldNum = null;
+    heldOperator = null;
     updateDisplay('0');
 }
 
@@ -59,7 +59,7 @@ function handleClick(e) {
         clear();
     } else if (target.classList.contains('num')) {
         handleNumber(Number(target.textContent));
-    } else if (target.classList.contains('operator')) {
+    } else if (target.classList.contains('operand')) {
         handleOperator(target.textContent);
     }
 
@@ -74,5 +74,11 @@ function handleNumber(num) {
 }
 
 function handleOperator(operator) {
-    console.log(operator);
+    heldOperator = operator;
+    if (heldNum === null) {
+        heldNum = Number(displayText);
+    } else {
+        updateDisplay(operate(operator, heldNum, Number(displayText)))
+    }
+    
 }
