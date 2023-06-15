@@ -86,6 +86,8 @@ function handleOperator(operator) {
 }
 
 function handleEquals() {
-    updateDisplay(operate(heldOperator, heldNum, Number(displayText)));
+    const equals = operate(heldOperator, heldNum, Number(displayText));
+    updateDisplay(equals);
     displayFlag = true;
+    return equals;
 }
