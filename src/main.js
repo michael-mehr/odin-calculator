@@ -61,16 +61,18 @@ function handleClick(e) {
         handleNumber(Number(target.textContent));
     } else if (target.classList.contains('operand')) {
         handleOperator(target.textContent);
+    } else if (target.textContent === "=") {
+        handleEquals();
     }
-
 }
 
 function handleNumber(num) {
-    if (displayText === '0') {
+    if (displayText === '0' || displayFlag) {
         updateDisplay(String(num));
     } else {
         updateDisplay(displayText + String(num));
     }
+    displayFlag = false;
 }
 
 function handleOperator(operator) {
@@ -78,7 +80,12 @@ function handleOperator(operator) {
     if (heldNum === null) {
         heldNum = Number(displayText);
     } else {
-        updateDisplay(operate(operator, heldNum, Number(displayText)))
+        updateDisplay(operate(operator, heldNum, Number(displayText)));
     }
-    
+    displayFlag = true;
+}
+
+function handleEquals() {
+    updateDisplay(operate(heldOperator, heldNum, Number(displayText)));
+    displayFlag = true;
 }
