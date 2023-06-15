@@ -76,12 +76,16 @@ function handleNumber(num) {
 }
 
 function handleOperator(operator) {
-    heldOperator = operator;
+    if (heldOperator === null) {
+        heldOperator = operator;
+    }
     if (heldNum === null) {
         heldNum = Number(displayText);
     } else {
-        updateDisplay(operate(operator, heldNum, Number(displayText)));
+        heldNum = operate(heldOperator, heldNum, Number(displayText))
+        updateDisplay(heldNum);
     }
+    heldOperator = operator
     displayFlag = true;
 }
 
