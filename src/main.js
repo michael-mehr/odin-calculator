@@ -5,6 +5,7 @@ const calcButtonsArray = [...calcButtons];
 calcButtonsArray.forEach(e => e.addEventListener('click', handleClick));
 
 let displayText = display.textContent;
+const MAX_DISPLAY_LENGTH = 10;
 
 let heldNum = null;
 let heldOperator = null;
@@ -48,7 +49,13 @@ function operate(operator, num1, num2) {
 }
 
 function updateDisplay(str) {
-    displayText = str;
+    if (!str) {
+        displayText = '0';
+    } else if (String(str).length > MAX_DISPLAY_LENGTH) {
+        displayText = String(str).slice(0, MAX_DISPLAY_LENGTH);
+    } else {
+        displayText = String(str);
+    }
     display.textContent = displayText;
 }
 
