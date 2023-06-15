@@ -28,6 +28,11 @@ function divide(num1, num2) {
 }
 
 function operate(operator, num1, num2) {
+    if (operator === '/' && num2 === 0) {
+        alert(`Hey! Stop that! Don't divide by zero!`);
+        clear();
+        return;
+    }
     switch (operator) {
         case '+':
             return add(num1, num2);
@@ -93,5 +98,6 @@ function handleEquals() {
     const equals = operate(heldOperator, heldNum, Number(displayText));
     updateDisplay(equals);
     displayFlag = true;
+    heldNum = null;
     return equals;
 }
